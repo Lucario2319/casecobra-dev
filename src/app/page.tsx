@@ -10,6 +10,7 @@ import { Reviews } from "@/components/Reviews";
 export default function Home() {
   return (
     <div className="bg-slate-50">
+      {/* Hero section */}
       <section>
         <MaxWidthWrapper className="pb-24 pt-10 lg:grid lg:grid-cols-3 sm:pb-32 lg:gap-x-0 xl:gap-x-8 lg:pt-24 xl:pt-32 lg:pb-52">
           <div className="col-span-2 px-6 lg:px-0 lg:pt-4">
@@ -109,7 +110,7 @@ export default function Home() {
         </MaxWidthWrapper>
       </section>
 
-      {/* value proposition section */}
+      {/* value proposition section, i.e. customer reviews */}
       <section className='bg-slate-100 grainy-dark py-24'>
         <MaxWidthWrapper className='flex flex-col items-center gap-16 sm:gap-32'>
           <div className='flex flex-col lg:flex-row items-center gap-4 sm:gap-6'>
@@ -204,6 +205,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* why this service and CTA section */}
       <section>
         <MaxWidthWrapper className='py-24'>
           <div className='mb-12 px-6 lg:px-8'>
@@ -224,6 +226,7 @@ export default function Home() {
                 src='/arrow.png'
                 className='absolute top-[25rem] md:top-1/2 -translate-y-1/2 z-10 left-1/2 -translate-x-1/2 rotate-90 md:rotate-0'
               />
+              {/* combo of md:top-1/2 -translate-y-1/2 used to center elem absolute vertically */}
 
               <div className='relative h-80 md:h-full w-full md:justify-self-end max-w-sm rounded-xl bg-gray-900/5 ring-inset ring-gray-900/10 lg:rounded-2xl'>
                 <img
@@ -243,7 +246,7 @@ export default function Home() {
             </li>
             <li className='w-fit'>
               <Check className='h-5 w-5 text-green-600 inline mr-1.5' />
-              Scratch- and fingerprint resistant coating
+              Scratch and fingerprint resistant coating
             </li>
             <li className='w-fit'>
               <Check className='h-5 w-5 text-green-600 inline mr-1.5' />
