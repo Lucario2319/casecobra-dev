@@ -22,8 +22,8 @@ export default function RootLayout({
       <body className={inter.className}>
         <Navbar/>
         {/* take as much space as possible to push footer down */}
-        <main className="flex flex-col min-h-[calc(100vh-3.5rem-1px)]">
-          <div className="flex- flex flex-col h-full">
+        <main className='flex grainy-light flex-col min-h-[calc(100vh-3.5rem-1px)]'>
+          <div className='flex-1 flex flex-col h-full'>
             {children}
           </div>
           <Footer/>
