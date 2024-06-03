@@ -1,6 +1,8 @@
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 // import { UploadThingError } from "uploadthing/server";
 import { z } from "zod";
+import sharp from "sharp";
+import { db } from "@/db";
 
 const f = createUploadthing();
  
@@ -20,10 +22,37 @@ export const ourFileRouter = {
     })
     .onUploadComplete(async ({ metadata, file }) => {
       // This code RUNS ON YOUR SERVER after upload
-      // console.log("file url", file.url);
       // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
       const { configId } = metadata.input
-      return { configId };
+      
+      const res = await fetch(file.url)
+      const buffer = await res.arrayBuffer()
+      const imgMetadata = await sharp(buffer).metadata()
+      const { width, height } = imgMetadata
+
+      if (!configId) {
+        // create a new row in our db with the new image that was uploaded
+        const configuration = await db.configuration.create({
+          data: {
+            imageUrl: file.url,
+            height: height || 500,
+            width: width || 500,
+          }
+        })
+
+        return { configId: configuration.id }
+      } else {
+        // this is run in step 2 when image cropped for phone cover
+        const updatedConfiguration = await db.configuration.update({
+          where: {
+            id: configId
+          },
+          data: {
+            croppedImageUrl: file.url,
+          }
+        })
+        return { configId: updatedConfiguration.id };
+      }
     }),
 } satisfies FileRouter;
  
